@@ -3,9 +3,7 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 declare global {
   namespace ReactNavigation {
@@ -14,22 +12,31 @@ declare global {
 }
 
 export type RootStackParamList = {
-  Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  // Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  Category: undefined;
+  FoodList: { categoryId: string };
+  FoodDetail: { mealId: string };
   Modal: undefined;
   NotFound: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
+export type FoodListScreenProps = NativeStackScreenProps<
   RootStackParamList,
-  Screen
+  "FoodList"
 >;
 
-export type RootTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+export type FoodListRouteProps = FoodListScreenProps["route"];
+
+export type FoodDetailScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  "FoodDetail"
+>;
+
+export type FoodDetailNavProps = FoodDetailScreenProps["navigation"];
+export type FoodDetailRouteProps = FoodDetailScreenProps["route"];
+
+export type Category = {
+  id: string;
+  title: string;
+  color: string;
 };
-
-export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<RootTabParamList, Screen>,
-  NativeStackScreenProps<RootStackParamList>
->;

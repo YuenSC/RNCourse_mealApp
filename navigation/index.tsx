@@ -12,7 +12,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
 
+import { CATEGORIES } from "../data/dummy-data";
 import CategorySelectionScreen from "../screens/CategorySelectionScreen";
+import FoodDetailScreen from "../screens/FoodDetailScreen";
+import FoodListScreen from "../screens/FoodListScreen";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { RootStackParamList } from "../types";
@@ -37,11 +40,45 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="Category"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "black",
+        },
+        headerTintColor: "white",
+        headerTitleStyle: {
+          color: "white",
+        },
+      }}
+    >
       <Stack.Screen
-        name="Root"
+        name="Category"
         component={CategorySelectionScreen}
-        options={{ headerShown: false }}
+        options={{
+          title: "All Categories",
+        }}
+      />
+      <Stack.Screen
+        name="FoodList"
+        component={FoodListScreen}
+        options={({ route }) => {
+          const selectedCategory = CATEGORIES.find(
+            (item) => item.id === route.params.categoryId
+          );
+          return {
+            title: selectedCategory?.title,
+          };
+        }}
+      />
+      <Stack.Screen
+        name="FoodDetail"
+        component={FoodDetailScreen}
+        options={() => {
+          return {
+            title: "About the meal",
+          };
+        }}
       />
       <Stack.Screen
         name="NotFound"

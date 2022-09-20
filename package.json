@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@react-native-community/eslint-config": "^3.1.0",
     "@types/react": "~18.0.14",
     "@types/react-native": "~0.69.1",
     "eslint": "^8.23.1",
@@ -47,9 +48,6 @@
     "prettier": "^2.7.1",
     "react-test-renderer": "18.0.0",
     "typescript": "~4.3.5"
-  },
-  "eslintConfig": {
-    "extends": "universe/native"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
